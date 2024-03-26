@@ -13,7 +13,7 @@ class Project extends Model
     use HasFactory;
     use softDeletes;
 
-    protected $fillable = ['title', 'slug' ,'content'];
+    protected $fillable = ['title', 'slug' ,'content', 'type_id'];
 
    /* public function getCreatedAt(){
         return Carbon::create($this->created_at)->format('d-m-Y');

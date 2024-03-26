@@ -29,7 +29,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
-        return view('admin.projects.create', compact('project'));
+        $types = Type::select('label', 'id')->get();
+
+        return view('admin.projects.create', compact('project', 'types'));
     }
 
     /**
@@ -41,6 +43,8 @@ class ProjectController extends Controller
             'title' => 'required|string|min:5|max:50|unique:projects',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:png,jpg,jpeg',
+            'type_id' => 'nullable|exists:types,id',
+
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'title.min' => 'Il titolo deve essere :min caratteri',
@@ -49,6 +53,8 @@ class ProjectController extends Controller
             'image.image' => 'Il file inserito non è un\'immagine',
             'image.mimes' => 'Le estensioni valide sono: .png, .jpg, .jpeg',
             'content.required' => 'Il contenuto è obbligatorio',
+            'type_id.exists' => 'Categoria non valida',
+
         ]);
 
         $data = $request->all();
@@ -83,7 +89,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::select('label','id')->get();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -96,6 +103,8 @@ class ProjectController extends Controller
             'title' => ['required','string','min:5','max:50', Rule::unique('projects')->ignore($project->id)],
             'content' => 'required|string',
             'image' => 'nullable|image',
+            'type_id' => 'nullable|exists:types,id',
+
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'title.min' => 'Il titolo deve essere :min caratteri',
@@ -104,6 +113,8 @@ class ProjectController extends Controller
             'image.image' => 'Il file inserito non è un\'immagine',
             'image.mimes' => 'Le estensioni valide sono: .png, .jpg, .jpeg',
             'content.required' => 'Il contenuto è obbligatorio',
+            'type_id.exists' => 'Categoria non valida',
+
         ]);
 
 

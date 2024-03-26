@@ -43,6 +43,19 @@
                 </div>
             </div>
 
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="type_id" class="form-label">Seleziona la tipologia</label>
+
+                <select name="type_id" id="type_id" class="form-select">
+                  <option value="">Nessuna</option>
+                  @foreach($types as $type)
+                  <option value="{{$type->id}}" @if(old('type_id', $project->$type?->id) == $type->id) selected @endif>{{$type->label}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
             <div class="col-11">
                 <div class="mb-3">
                   <label for="image" class="form-label">Image</label>

@@ -25,10 +25,13 @@ class ProjectFactory extends Factory
         Storage::makeDirectory('projects_images');
 
         $image_url = Storage::putFileAs('projects_images', fake()->image(storage_path('app/public/projects_images'), 250, 250), "$slug.png" );
-        
+        $type_ids = Type::pluck('id')->toArray();
+        $type_ids[] = null;
+
         return [
             'title' => $title,
             'slug' => $slug,
+            'type_id' => Arr::random($type_ids),
             'content' => fake()->paragraphs(1, true),
             'image' => $image_url,
 

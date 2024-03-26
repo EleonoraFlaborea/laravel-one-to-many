@@ -6,6 +6,10 @@
 
 <header>
     <h1 class="my-5">{{$project->title}}</h1>
+    <p class="my-5">Tipologia: @if($project->type) 
+       <span class="badge" style="background-color: {{$project->type->color}}"> {{$project->type->label}} </span>
+       @else Nessuna @endif</p>
+
 </header>
 
 
