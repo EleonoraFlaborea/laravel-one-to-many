@@ -29,7 +29,7 @@
 
 </div>
 @empty
-   <h3 class="text-center">Non ci sono progetti </h3>
+   <h3 class="text-center">Non ci sono progetti!</h3>
  
 
  @endforelse
