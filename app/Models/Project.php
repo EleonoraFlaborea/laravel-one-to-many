@@ -27,4 +27,10 @@ class Project extends Model
     public function printImage(){
         return asset('storage/' . $this->image);
     }
+
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
 }
+
+
